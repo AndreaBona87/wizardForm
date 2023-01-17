@@ -165,8 +165,7 @@ class Wizard {
         this.updateButtonsStatus();
     }
 
-    moveStep(movement) {
-        console.log("moveStep movement " + movement);
+    moveStep(movement) {       
 	    
         if (!this.isForwardMovement(movement) || !this.nextControl.classList.contains('disabled')) {
             if (this.validateMovement(movement)) {
@@ -190,7 +189,6 @@ class Wizard {
     }
     isForwardMovement(movement) {
         const fowardMov = movement > 0 && this.currentStep < this.stepsQuantity - 1;
-        console.log("is Forward Movement " + fowardMov);
         return fowardMov;
     }
 }
@@ -231,9 +229,11 @@ MsCrmMkt.MsCrmFormLoader.on('afterFormLoad', function(event) {
 			});
 	   }
     });
+	document.querySelectorAll('input[name="f40aa13a-8f55-eb11-a812-0022489b6868"]')[0].addEventListener("focusout", function(evt) {
+		onChangeIsAlreadyOpen();
+	});
 });
 function fieldChange(target){
-	console.log("changed");
     var elementName = target.getAttribute("name");
 	var type = target.getAttribute("crm-type");  //optionset
 	var elementValue = target.value;
@@ -242,7 +242,6 @@ function fieldChange(target){
         isChecked = target.checked;
 	}
 	var editedFieldId = target.id;
-    console.log("change input: eName= " + elementName + " eValue= " + elementValue);
     setCRMFieldValue(elementName, elementValue,editedFieldId,isChecked);
     checkRequiredFields(); 
 }
@@ -271,17 +270,12 @@ function checkRequiredFields() {
 	   reqFields = currentPanelRules.split(';');
 	}
 	var valids = [];
-	console.log("required ids: "+JSON.stringify(reqFields));
 	var noRule = false;
 	reqFields.forEach(element => {
-	  console.log("checking id: "+element);
 	  if (document.getElementById(element) != null) {
 	    var type = document.getElementById(element).getAttribute("crm-type");
-	    var value = type == "radio" || type == "optionset" ? document.getElementById(element).checked : document.getElementById(element).value;
-	    console.log("Type = "+type+" value = "+value);
-	    console.log("checking id of type: "+type+" value: "+document.getElementById(element).value+" or checked: "+document.getElementById(element).checked);
+	    var value = type == "radio" || type == "optionset" ? document.getElementById(element).checked : document.getElementById(element).value;   
         if (value != null && value != "" && value != false) {
-	        console.log("pushing id");
 	        valids.push(element);
         }
     }else if(currentPanelRules == "x"){
@@ -289,20 +283,19 @@ function checkRequiredFields() {
         buttonNext.classList.remove('disabled');
         let errorMessage = document.querySelector('#errorMessage');
         errorMessage.style.display = 'none';
-	    console.log("returning");
 	    noRule = true;
 	    return;
 	}
 	});
-	console.log("valids.length = "+valids.length+" operation = "+operation+" reqFields = "+reqFields.length);
+
 	if(((valids.length == reqFields.length && operation == "and") || (valids.length > 0 && operation == "or")) && !noRule){
-	    console.log("enabling");
+
 	    let buttonNext = document.querySelector('.next');
         buttonNext.classList.remove('disabled');
         let errorMessage = document.querySelector('#errorMessage');
         errorMessage.style.display = 'none';
 	}else if(!noRule){
-	    console.log("disablig");
+
 	    let buttonNext = document.querySelector('.next');
         buttonNext.classList.add('disabled');
         let errorMessage = document.querySelector('#errorMessage');
@@ -312,9 +305,9 @@ function checkRequiredFields() {
 
 function setCRMFieldValue(name, value,editedFieldId,isChecked) {
     var id = name.replace("_UI", "").replace(`_${value}`,"");
-    console.log("updating: "+id+" Val: "+value);
+
 	    var crmType = document.getElementById(editedFieldId).getAttribute("crm-type");
-	    console.log("Field with type: "+ crmType+" is changed");
+
 	    if(crmType == "lookup")
 			setMacrochannel();
 	    else if(crmType == "optionset" && document.getElementById(id+"_"+value))
@@ -338,7 +331,7 @@ function selectOption(e, t) {
     var n = Array.from(document.getElementById(e).parentNode.getElementsByClassName("ui-menu-item")).filter((function(e) {
         return e.innerText == t
     }));
-    console.log(e + " len: " + n.length), 1 == n.length ? (n[0].classList.add("ui-state-active"), document.getElementById(e).setAttribute("data-value", n[0].dataset.value), console.log("setted " + e)) : setTimeout((function() {
+    1 == n.length ? (n[0].classList.add("ui-state-active"), document.getElementById(e).setAttribute("data-value", n[0].dataset.value)) : setTimeout((function() {
         selectOption(e, t)
     }), 1e3)
 }
@@ -440,4 +433,13 @@ function setMacrochannel() {
 	    }else{
 	       return false;
 	    }
+	}
+	function onChangeIsAlreadyOpen(){
+	var isOpen = document.querySelectorAll('input[name="f40aa13a-8f55-eb11-a812-0022489b6868"]');
+	if(isOpen){
+	    var value = isOpen[0].value;
+	    console.log("Test: "+value);
+	}else{
+	    console.log("XX");
+	}
 	}
