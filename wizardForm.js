@@ -195,7 +195,6 @@ class Wizard {
 var validateRules = '{"panel1":"interested","panel2":"880b0676-b480-ed11-81ad-000d3aba3d29_2|880b0676-b480-ed11-81ad-000d3aba3d29_3|880b0676-b480-ed11-81ad-000d3aba3d29_8|880b0676-b480-ed11-81ad-000d3aba3d29_0","panel3":"7f685ebb-7c54-4cff-a1bc-772562d25c38;3f746946-34b4-442c-a677-e232cdd2bc40;e1dfc514-f301-4cb2-855a-4c8fa8331207;790a6bdd-7832-4dd6-8f30-ed8d8772966e;fc0308ab-609e-45c8-9f5e-9eca3511dc39;eae4766c-f91a-4648-afb1-259b97e89cab;ac6a065d-364e-40d6-9a19-d9bf1ed4aa3e","panel4":"31cf7f09-7f55-eb11-a812-0022489b6868;0d700c73-8055-eb11-a812-0022489b6868","panel5":"bacd7a58-1757-eb11-a812-0022489b6868","panel6":"f40aa13a-8f55-eb11-a812-0022489b6868_1|f40aa13a-8f55-eb11-a812-0022489b6868_0","panel7":"prv1_1;prv2_1"}';
 
 MsCrmMkt.MsCrmFormLoader.on('afterFormLoad', function(event) {
-    debugger;
     let wizardElement = document.getElementById('wizard');
     let wizard = new Wizard(wizardElement);
     let buttonNext = document.querySelector('.next');
@@ -229,9 +228,6 @@ MsCrmMkt.MsCrmFormLoader.on('afterFormLoad', function(event) {
 			});
 	   }
     });
-	document.querySelectorAll('input[name="f40aa13a-8f55-eb11-a812-0022489b6868"]')[0].addEventListener("focusout", function(evt) {
-		onChangeIsAlreadyOpen();
-	});
 });
 function fieldChange(target){
     var elementName = target.getAttribute("name");
@@ -250,16 +246,21 @@ function onChangeIsOpen() {
     if (isOpen == 1) {
         document.querySelector('#openingDateContainer').style.display = 'none';
         document.querySelector('#signatureContainer').style.display = 'block';
+
+	    manageRequired("panel6","1644edd7-8e55-eb11-a812-0022489b6868",0);
+	    manageRequired("panel6","d4b0bb6e-8e55-eb11-a812-0022489b6868",1);
     } else {
         document.querySelector('#signatureContainer').style.display = 'none';
         document.querySelector('#openingDateContainer').style.display = 'block';
+
+	    manageRequired("panel6","1644edd7-8e55-eb11-a812-0022489b6868",1);
+	    manageRequired("panel6","d4b0bb6e-8e55-eb11-a812-0022489b6868",0);
     }
 }
 
 function checkRequiredFields() {
     var reqRules = JSON.parse(validateRules);
     var currentPanelId = document.querySelector('.movingIn');
-	debugger;
     var currentPanelRules = reqRules[currentPanelId.id];
 	var operation = "and";
 	var reqFields = "";
@@ -331,9 +332,14 @@ function selectOption(e, t) {
     var n = Array.from(document.getElementById(e).parentNode.getElementsByClassName("ui-menu-item")).filter((function(e) {
         return e.innerText == t
     }));
-    1 == n.length ? (n[0].classList.add("ui-state-active"), document.getElementById(e).setAttribute("data-value", n[0].dataset.value)) : setTimeout((function() {
+    if(1 == n.length){ 
+	    n[0].classList.add("ui-state-active");
+	    document.getElementById(e).setAttribute("data-value", n[0].dataset.value);
+	}else{ 
+	setTimeout((function() {
         selectOption(e, t)
-    }), 1e3)
+    }), 1e3);
+	}
 }
 
 function setMacrochannel() {
@@ -390,7 +396,6 @@ function setMacrochannel() {
 
 }
 	function manageRequired(panelid,fieldId,operation){
-	    debugger;
 	    var reqRules = JSON.parse(validateRules);
 		var currentPanelRules = reqRules[panelid];
 	    var operator = ";"
@@ -433,13 +438,4 @@ function setMacrochannel() {
 	    }else{
 	       return false;
 	    }
-	}
-	function onChangeIsAlreadyOpen(){
-	var isOpen = document.querySelectorAll('input[name="f40aa13a-8f55-eb11-a812-0022489b6868"]');
-	if(isOpen){
-	    var value = isOpen[0].value;
-	    console.log("Test: "+value);
-	}else{
-	    console.log("XX");
-	}
 	}
