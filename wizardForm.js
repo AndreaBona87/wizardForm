@@ -229,6 +229,10 @@ MsCrmMkt.MsCrmFormLoader.on('afterFormLoad', function(event) {
             });
         }
     });
+    var htmlTag = document.getElementsByTagName('html')[0];
+    
+    if(htmlTag)
+        htmlTag.classList.remove('flexbox');
 });
 
 function fieldChange(target) {
