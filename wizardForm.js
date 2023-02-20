@@ -334,11 +334,10 @@ function setCRMFieldValue(name, value, editedFieldId, isChecked) {
         setMacrochannel();
     else if (crmType == "optionset" && document.getElementById(id + "_" + value))
         document.getElementById(id + "_" + value).checked = isChecked;
-    else if (document.getElementById(id))
-        document.getElementById(id).value = value;
     else if (crmType == "crmLookup")
         setLookup(id, value);
-
+    else if (document.getElementById(id))
+        document.getElementById(id).value = value;
 }
 
 function setLookup(e, t) {
