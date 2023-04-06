@@ -420,6 +420,13 @@ function setMacrochannel() {
             manageRequired("panel5", "bacd7a58-1757-eb11-a812-0022489b6868", 0);
             document.getElementById("coffeNumReq").style.display = 'none';
         }
+        if ("ufficio" == type) {
+            document.getElementById("openingQuestions").style.display = "none";
+            document.getElementById("employeeQuestion").style.display = "block";
+        } else {
+            document.getElementById("openingQuestions").style.display = "block";
+            document.getElementById("employeeQuestion").style.display = "none";
+        }
     }
 
 }
