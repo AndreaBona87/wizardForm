@@ -193,9 +193,15 @@ class Wizard {
     }
 }
 
-var validateRules = '{"panel1":"interested","panel2":"880b0676-b480-ed11-81ad-000d3aba3d29_0","panel3":"7f685ebb-7c54-4cff-a1bc-772562d25c38;3f746946-34b4-442c-a677-e232cdd2bc40;e1dfc514-f301-4cb2-855a-4c8fa8331207;790a6bdd-7832-4dd6-8f30-ed8d8772966e;fc0308ab-609e-45c8-9f5e-9eca3511dc39;eae4766c-f91a-4648-afb1-259b97e89cab;ac6a065d-364e-40d6-9a19-d9bf1ed4aa3e","panel4":"31cf7f09-7f55-eb11-a812-0022489b6868;0d700c73-8055-eb11-a812-0022489b6868","panel5":"bacd7a58-1757-eb11-a812-0022489b6868","panel6":"f40aa13a-8f55-eb11-a812-0022489b6868_0","panel7":"prv1_1;prv2_1"}';
+var validateRules = '{"panel1":"31cf7f09-7f55-eb11-a812-0022489b6868;0d700c73-8055-eb11-a812-0022489b6868","panel2":"x","panel3":"bacd7a58-1757-eb11-a812-0022489b6868","panel4":"f40aa13a-8f55-eb11-a812-0022489b6868_0","panel5":"7f685ebb-7c54-4cff-a1bc-772562d25c38;3f746946-34b4-442c-a677-e232cdd2bc40;e1dfc514-f301-4cb2-855a-4c8fa8331207;790a6bdd-7832-4dd6-8f30-ed8d8772966e;fc0308ab-609e-45c8-9f5e-9eca3511dc39;eae4766c-f91a-4648-afb1-259b97e89cab;ac6a065d-364e-40d6-9a19-d9bf1ed4aa3e","panel6":"prv1_1;prv2_1"}';
 
-MsCrmMkt.MsCrmFormLoader.on('afterFormLoad', function(event) {
+document.addEventListener("DOMContentLoaded", function () {
+    var htmlTag = document.getElementsByTagName('html')[0];
+    if (htmlTag)
+        htmlTag.classList.remove('flexbox');
+});
+
+MsCrmMkt.MsCrmFormLoader.on('afterFormLoad', function (event) {
     let wizardElement = document.getElementById('wizard');
     let wizard = new Wizard(wizardElement);
     let buttonNext = document.querySelector('.next');
@@ -208,23 +214,23 @@ MsCrmMkt.MsCrmFormLoader.on('afterFormLoad', function(event) {
         initialCountry: "it",
     }));
 
-    document.querySelector('#isOpenChoice-1').addEventListener("change", function() {
+    document.querySelector('#isOpenChoice-1').addEventListener("change", function () {
         onChangeIsOpen();
     });
 
-    document.querySelector('#isOpenChoice-2').addEventListener("change", function() {
+    document.querySelector('#isOpenChoice-2').addEventListener("change", function () {
         onChangeIsOpen();
     });
 
     var inputs = document.querySelectorAll('input');
-    inputs.forEach(function(element) {
+    inputs.forEach(function (element) {
         var type = element.getAttribute("crm-type");
         if (type == "crmLookup") {
-            element.addEventListener("focusout", function(evt) {
+            element.addEventListener("focusout", function (evt) {
                 fieldChange(evt.target);
             });
         } else {
-            element.addEventListener("change", function(evt) {
+            element.addEventListener("change", function (evt) {
                 fieldChange(evt.target);
             });
         }
@@ -250,9 +256,9 @@ function onChangeIsOpen() {
         document.querySelector('#openingDateContainer').style.display = 'none';
         document.querySelector('#signatureContainer').style.display = 'block';
 
-        manageRequired("panel6", "1644edd7-8e55-eb11-a812-0022489b6868", 0);
+        manageRequired("panel4", "1644edd7-8e55-eb11-a812-0022489b6868", 0);
         document.getElementById("openingDateReq").style.display = 'none';
-        manageRequired("panel6", "d4b0bb6e-8e55-eb11-a812-0022489b6868", 1);
+        manageRequired("panel4", "d4b0bb6e-8e55-eb11-a812-0022489b6868", 1);
         document.getElementById("signatureReq").style.display = 'inline';
 
         document.getElementById("openingDate").value = null;
@@ -263,9 +269,9 @@ function onChangeIsOpen() {
         document.querySelector('#signatureContainer').style.display = 'none';
         document.querySelector('#openingDateContainer').style.display = 'block';
 
-        manageRequired("panel6", "1644edd7-8e55-eb11-a812-0022489b6868", 1);
+        manageRequired("panel4", "1644edd7-8e55-eb11-a812-0022489b6868", 1);
         document.getElementById("openingDateReq").style.display = 'inline';
-        manageRequired("panel6", "d4b0bb6e-8e55-eb11-a812-0022489b6868", 0);
+        manageRequired("panel4", "d4b0bb6e-8e55-eb11-a812-0022489b6868", 0);
         document.getElementById("signatureReq").style.display = 'none';
 
         document.getElementById("d4b0bb6e-8e55-eb11-a812-0022489b6868_UI").value = null;
@@ -334,30 +340,31 @@ function setCRMFieldValue(name, value, editedFieldId, isChecked) {
         setMacrochannel();
     else if (crmType == "optionset" && document.getElementById(id + "_" + value))
         document.getElementById(id + "_" + value).checked = isChecked;
-    else if (crmType == "crmLookup")
-        setLookup(id, value);
     else if (document.getElementById(id))
         document.getElementById(id).value = value;
+    else if (crmType == "crmLookup")
+        setLookup(id, value);
+
 }
 
 function setLookup(e, t) {
     document.getElementById(e).value = t;
     var n = document.createEvent("KeyboardEvent");
-    n[void 0 !== n.initKeyboardEvent ? "initKeyboardEvent" : "initKeyEvent"]("keyup", !0, !0, window, !1, !1, !1, !1, 40, 0), document.getElementById(e).focus(), document.getElementById(e).dispatchEvent(n), setTimeout((function() {
+    n[void 0 !== n.initKeyboardEvent ? "initKeyboardEvent" : "initKeyEvent"]("keyup", !0, !0, window, !1, !1, !1, !1, 40, 0), document.getElementById(e).focus(), document.getElementById(e).dispatchEvent(n), setTimeout((function () {
         selectOption(e, t)
     }), 1e3)
 }
 
 function selectOption(e, t) {
     Array.from(document.getElementById(e).parentNode.getElementsByClassName("ui-menu-item"));
-    var n = Array.from(document.getElementById(e).parentNode.getElementsByClassName("ui-menu-item")).filter((function(e) {
+    var n = Array.from(document.getElementById(e).parentNode.getElementsByClassName("ui-menu-item")).filter((function (e) {
         return e.innerText == t
     }));
     if (1 == n.length) {
         n[0].classList.add("ui-state-active");
         document.getElementById(e).setAttribute("data-value", n[0].dataset.value);
     } else {
-        setTimeout((function() {
+        setTimeout((function () {
             selectOption(e, t)
         }), 1e3);
     }
