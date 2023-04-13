@@ -492,7 +492,7 @@ function isRequired(panelid, fieldId) {
 
 function checkFieldValidity(fieldId) {
     let result = true;
-    let escapeRegexPatterns = pattern.replaceAll("\\", "\\\\");
+    let escapeRegexPatterns = regexPatterns.replaceAll("\\", "\\\\");
     console.log("1- "+escapeRegexPatterns);
     let reqPatterns = JSON.parse(escapeRegexPatterns);
     let pattern = reqPatterns[fieldId];
