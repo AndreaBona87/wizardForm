@@ -495,7 +495,7 @@ function checkFieldValidity(fieldId) {
     let reqPatterns = JSON.parse(regexPatterns);
     let pattern = reqPatterns[fieldId];
     if (pattern != null && pattern != "") {
-        let patternRegex = new RegExp(pattern);
+        let patternRegex = new RegExp(pattern, "i");
         var element = document.getElementById(fieldId);
         var val = element.value;
         result = patternRegex.test(val);
