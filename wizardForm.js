@@ -297,7 +297,7 @@ function checkRequiredFields() {
             var type = document.getElementById(element).getAttribute("crm-type");
             var name = document.getElementById(element).getAttribute("name");
             var isInvalid = document.getElementById(element).classList.contains("is-invalid");
-            console.log(`element: ${name} isInvalid: ${isInvalid}`);
+            console.log(`element: ${document.getElementById(element).getAttribute('id') } isInvalid: ${isInvalid}`);
             if (!isInvalid) {
                 var value = "";
                 if (type == "radio" || type == "optionset") {
