@@ -498,8 +498,8 @@ function checkFieldValidity(fieldId) {
     let pattern = reqPatterns[fieldId];
     if (pattern != null && pattern != "") {
         let escapeRegex = pattern.replaceAll("\\", "\\\\");
-        console.log("2- "+escapeRegex);
-        let patternRegex = new RegExp(escapeRegex, "i");
+        console.log("2- " + pattern);
+        let patternRegex = new RegExp(pattern, "i");
         var element = document.getElementById(fieldId);
         var val = element.value;
         result = patternRegex.test(val);
