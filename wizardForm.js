@@ -296,6 +296,7 @@ function checkRequiredFields() {
 
             var type = document.getElementById(element).getAttribute("crm-type");
             var name = document.getElementById(element).getAttribute("name");
+            debugger;
             var isInvalid = document.getElementById(element).classList.contains("is-invalid");
             if (!isInvalid) {
                 var value = "";
