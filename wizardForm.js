@@ -296,8 +296,8 @@ function checkRequiredFields() {
 
             var type = document.getElementById(element).getAttribute("crm-type");
             var name = document.getElementById(element).getAttribute("name");
-            debugger;
             var isInvalid = document.getElementById(element).classList.contains("is-invalid");
+            console.log(`element: ${name} isInvalid: ${isInvalid}`);
             if (!isInvalid) {
                 var value = "";
                 if (type == "radio" || type == "optionset") {
@@ -496,12 +496,12 @@ function isRequired(panelid, fieldId) {
 function checkFieldValidity(fieldId) {
     let result = true;
     let escapeRegexPatterns = regexPatterns.replaceAll("\\", "\\\\");
-    console.log("1- "+escapeRegexPatterns);
+    //console.log("1- "+escapeRegexPatterns);
     let reqPatterns = JSON.parse(escapeRegexPatterns);
     let pattern = reqPatterns[fieldId];
     if (pattern != null && pattern != "") {
-        let escapeRegex = pattern.replaceAll("\\", "\\\\");
-        console.log("2- " + pattern);
+        //let escapeRegex = pattern.replaceAll("\\", "\\\\");
+        //console.log("2- " + pattern);
         let patternRegex = new RegExp(pattern, "i");
         var element = document.getElementById(fieldId);
         var val = element.value;
