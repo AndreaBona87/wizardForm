@@ -495,9 +495,10 @@ function checkFieldValidity(fieldId) {
     let reqPatterns = JSON.parse(regexPatterns);
     let pattern = reqPatterns[fieldId];
     if (pattern != null && pattern != "") {
+        let patternRegex = new RegExp(pattern);
         var element = document.getElementById(fieldId);
         var val = element.value;
-        result = pattern.test(val);
+        result = patternRegex.test(val);
         if (!result && val != "") {
             element.classList.add("form-control");
             element.classList.add("is-invalid");
