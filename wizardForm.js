@@ -247,8 +247,8 @@ function fieldChange(target) {
     }
     var editedFieldId = target.id;
     setCRMFieldValue(elementName, elementValue, editedFieldId, isChecked);
-    if (checkFieldValidity(target.getAttribute("id")))
-        checkRequiredFields();
+    checkFieldValidity(target.getAttribute("id"));
+    checkRequiredFields();
 }
 
 function onChangeIsOpen() {
@@ -296,16 +296,18 @@ function checkRequiredFields() {
 
             var type = document.getElementById(element).getAttribute("crm-type");
             var name = document.getElementById(element).getAttribute("name");
+            var isInvalid = document.getElementById(element).classList.contains("is-invalid");
+            if (!isInvalid) {
+                var value = "";
+                if (type == "radio" || type == "optionset") {
+                    value = Array.from(document.getElementsByName(name)).find(r => r.checked)?.checked != undefined;
+                } else {
+                    value = document.getElementById(element).value;
+                }
 
-            var value = "";
-            if (type == "radio" || type == "optionset") {
-                value = Array.from(document.getElementsByName(name)).find(r => r.checked)?.checked != undefined;
-            } else {
-                value = document.getElementById(element).value;
-            }
-
-            if (value != null && value != "" && value != false) {
-                valids.push(element);
+                if (value != null && value != "" && value != false) {
+                    valids.push(element);
+                }
             }
         } else if (currentPanelRules == "x") {
             let buttonNext = document.querySelector('.next');
