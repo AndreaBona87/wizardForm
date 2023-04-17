@@ -504,16 +504,21 @@ function checkFieldValidity(fieldId) {
         //console.log("2- " + pattern);
         let patternRegex = new RegExp(pattern, "i");
         var element = document.getElementById(fieldId);
+        var errorMessageElement = document.getElementById(fieldId+"Feedback");
         var val = element.value;
         result = patternRegex.test(val);
         if (!result && val != "") {
             element.classList.add("form-control");
             element.classList.add("is-invalid");
             element.classList.add("is-invalid-border");
+            if (errorMessageElement)
+                errorMessageElement.style.display = 'block';
         } else {
             element.classList.remove("form-control");
             element.classList.remove("is-invalid");
             element.classList.remove("is-invalid-border");
+            if (errorMessageElement)
+                errorMessageElement.style.display = 'none';
         }
     }
     return result;
