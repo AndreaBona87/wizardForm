@@ -511,12 +511,14 @@ function checkFieldValidity(fieldId) {
             element.classList.add("form-control");
             element.classList.add("is-invalid");
             element.classList.add("is-invalid-border");
+            element.classList.remove("is-valid-border");
             if (errorMessageElement)
                 errorMessageElement.style.display = 'block';
         } else {
             element.classList.remove("form-control");
             element.classList.remove("is-invalid");
             element.classList.remove("is-invalid-border");
+            element.classList.add("is-valid-border");
             if (errorMessageElement)
                 errorMessageElement.style.display = 'none';
         }
