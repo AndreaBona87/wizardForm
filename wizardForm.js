@@ -429,6 +429,9 @@ function setMacrochannel() {
             setLookup("31cf7f09-7f55-eb11-a812-0022489b6868", "VENDING");
             setLookup("0d700c73-8055-eb11-a812-0022489b6868", null);
 
+            manageRequired("panel5", "bacd7a58-1757-eb11-a812-0022489b6868", 1);
+            document.getElementById("coffeNumReq").style.display = 'inline';
+
             document.getElementById("openingQuestions").style.display = "none";
             document.getElementById("employeeQuestion").style.display = "block";
 
