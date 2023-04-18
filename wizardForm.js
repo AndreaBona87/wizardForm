@@ -389,7 +389,7 @@ function setMacrochannel() {
             "ristorante" == type ||
             "hotel" == type ||
             "catering" == type ||
-            "ufficio" == type ||
+            //"ufficio" == type ||
             "altro" == type) {
 
             setLookup("31cf7f09-7f55-eb11-a812-0022489b6868", "HO.RE.CA.");
@@ -426,6 +426,9 @@ function setMacrochannel() {
             document.getElementById("coffeNumReq").style.display = 'none';
         }
         if ("ufficio" == type) {
+            setLookup("31cf7f09-7f55-eb11-a812-0022489b6868", "VENDING");
+            setLookup("0d700c73-8055-eb11-a812-0022489b6868", null);
+
             document.getElementById("openingQuestions").style.display = "none";
             document.getElementById("employeeQuestion").style.display = "block";
 
