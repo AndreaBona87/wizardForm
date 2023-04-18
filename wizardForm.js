@@ -144,6 +144,7 @@ class Wizard {
 
     }
     sendSubmitToCRM() {
+        document.getElementById('congrats-message').style.display = "block";
         document.getElementsByName("submit8ba866e7-0aa3-d0e6-b145-cf1244330fb6")[0].click();
     }
 
