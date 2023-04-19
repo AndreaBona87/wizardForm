@@ -40,10 +40,6 @@ class Panels {
 
         this.updatePanelsPosition(this.currentStep);
         this.updatePanelsContainerHeight();
-
-        window.addEventListener('resize', function (event) {
-            this.updatePanelsContainerHeight();
-        }, true);
     }
 
     getCurrentPanelHeight() {
