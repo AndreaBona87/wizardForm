@@ -404,8 +404,13 @@ function setMacrochannel() {
                 setLookup("0d700c73-8055-eb11-a812-0022489b6868", "HO.RE.CA. - OTHER");
                 //setRequired("numcoffee")) 
             }
-            manageRequired("panel3", "bacd7a58-1757-eb11-a812-0022489b6868", 1);
-            document.getElementById("coffeNumReq").style.display = 'inline';
+            if ("catering" != type && "altro" != type) {
+                manageRequired("panel3", "bacd7a58-1757-eb11-a812-0022489b6868", 1);
+                document.getElementById("coffeNumReq").style.display = 'inline';
+            } else {
+                manageRequired("panel3", "bacd7a58-1757-eb11-a812-0022489b6868", 0);
+                document.getElementById("coffeNumReq").style.display = 'none';
+            }
         }
         else if ("negozio_articoli_casa" == type ||
             "negozio_specializzato" == type) {
@@ -443,6 +448,7 @@ function setMacrochannel() {
 
             //add opening mandatory
             manageRequired("panel4", "f40aa13a-8f55-eb11-a812-0022489b6868_0", 1);
+            document.getElementById("coffeNumReq").style.display = 'inline';
         }
     }
 
