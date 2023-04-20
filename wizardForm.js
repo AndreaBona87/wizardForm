@@ -437,14 +437,14 @@ function setMacrochannel() {
             manageRequired("panel3", "bacd7a58-1757-eb11-a812-0022489b6868", 1);
             document.getElementById("coffeNumReq").style.display = 'inline';
 
-            document.getElementById("openingQuestions").style.display = "none";
-            document.getElementById("employeeQuestion").style.display = "block";
+            //document.getElementById("openingQuestions").style.display = "none";
+            //document.getElementById("employeeQuestion").style.display = "block";
 
             //remove opening mandatory
             manageRequired("panel4", "f40aa13a-8f55-eb11-a812-0022489b6868_0", 0);
         } else {        
-            document.getElementById("openingQuestions").style.display = "block";
-            document.getElementById("employeeQuestion").style.display = "none";
+            //document.getElementById("openingQuestions").style.display = "block";
+            //document.getElementById("employeeQuestion").style.display = "none";
 
             //add opening mandatory
             manageRequired("panel4", "f40aa13a-8f55-eb11-a812-0022489b6868_0", 1);
