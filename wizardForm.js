@@ -450,6 +450,8 @@ function setMacrochannel() {
             manageRequired("panel4", "f40aa13a-8f55-eb11-a812-0022489b6868_0", 1);
             document.getElementById("coffeNumReq").style.display = 'inline';
         }
+        //rimuove domanda numero dipendenti per tutti
+        document.getElementById("employeeQuestion").style.display = "none";
     }
 
 }
