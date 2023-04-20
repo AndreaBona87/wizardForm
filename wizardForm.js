@@ -382,7 +382,7 @@ function setMacrochannel() {
             setLookup("31cf7f09-7f55-eb11-a812-0022489b6868", "ILLYCAFFE\'");
             setLookup("0d700c73-8055-eb11-a812-0022489b6868", "ILLYCAFFE\' - FRANCHISEE");
             //setRequired("numcoffee"))
-            manageRequired("panel5", "bacd7a58-1757-eb11-a812-0022489b6868", 1);
+            manageRequired("panel3", "bacd7a58-1757-eb11-a812-0022489b6868", 1);
             document.getElementById("coffeNumReq").style.display = 'inline';
         } else if ("bar" == type ||
             "pasticceria_gelateria" == type ||
@@ -404,10 +404,10 @@ function setMacrochannel() {
                 setLookup("0d700c73-8055-eb11-a812-0022489b6868", "HO.RE.CA. - OTHER");
                 //setRequired("numcoffee")) 
             }
-            manageRequired("panel5", "bacd7a58-1757-eb11-a812-0022489b6868", 1);
+            manageRequired("panel3", "bacd7a58-1757-eb11-a812-0022489b6868", 1);
             document.getElementById("coffeNumReq").style.display = 'inline';
         }
-        if ("negozio_articoli_casa" == type ||
+        else if ("negozio_articoli_casa" == type ||
             "negozio_specializzato" == type) {
             setLookup("31cf7f09-7f55-eb11-a812-0022489b6868", "ELDOM");
             if ("negozio_articoli_casa" == type) {
@@ -416,20 +416,20 @@ function setMacrochannel() {
                 setLookup("0d700c73-8055-eb11-a812-0022489b6868", "ELDOM - DEPARTMENT STORE/ ELECTRONIC STORES (GDS)");
                 //removeRequired("numcoffee")) 
             }
-            manageRequired("panel5", "bacd7a58-1757-eb11-a812-0022489b6868", 0);
+            manageRequired("panel3", "bacd7a58-1757-eb11-a812-0022489b6868", 0);
             document.getElementById("coffeNumReq").style.display = 'none';
         }
-        if ("negozio_alimentari" == type) {
+        else if ("negozio_alimentari" == type) {
             setLookup("31cf7f09-7f55-eb11-a812-0022489b6868", "SPEC. RETAIL");
             setLookup("0d700c73-8055-eb11-a812-0022489b6868", "SPEC. RETAIL - GROCERY");
-            manageRequired("panel5", "bacd7a58-1757-eb11-a812-0022489b6868", 0);
+            manageRequired("panel3", "bacd7a58-1757-eb11-a812-0022489b6868", 0);
             document.getElementById("coffeNumReq").style.display = 'none';
         }
-        if ("ufficio" == type) {
+        else if ("ufficio" == type) {
             setLookup("31cf7f09-7f55-eb11-a812-0022489b6868", "VENDING");
             setLookup("0d700c73-8055-eb11-a812-0022489b6868", null);
 
-            manageRequired("panel5", "bacd7a58-1757-eb11-a812-0022489b6868", 1);
+            manageRequired("panel3", "bacd7a58-1757-eb11-a812-0022489b6868", 1);
             document.getElementById("coffeNumReq").style.display = 'inline';
 
             document.getElementById("openingQuestions").style.display = "none";
