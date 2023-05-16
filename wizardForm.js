@@ -236,6 +236,9 @@ MsCrmMkt.MsCrmFormLoader.on('afterFormLoad', function (event) {
             });
         }
     });
+
+    if(document.getElementsByClassName("iti__selected-flag").length > 0)
+        document.getElementsByClassName("iti__selected-flag")[0].setAttribute("tabindex", "-1");
 });
 
 function fieldChange(target) {
